@@ -19,7 +19,7 @@ class FormValidator {
 
   _showInputError(inputElement, errorMessage) {
     const errorElement = this._formEl.querySelector(
-      `.${inputElement.id}-error`
+      `#${inputElement.id}-error`
     );
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = errorMessage;
@@ -28,7 +28,7 @@ class FormValidator {
 
   _hideInputError(inputElement) {
     const errorElement = this._formEl.querySelector(
-      `.${inputElement.id}-error`
+      `#${inputElement.id}-error`
     );
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
@@ -70,6 +70,7 @@ class FormValidator {
   enableValidation() {
     this._formEl.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this.resetValidation();
     });
     this._setEventListeners();
   }
@@ -77,6 +78,8 @@ class FormValidator {
   resetValidation() {
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);
+      this._formEl.reset();
+      this._toggleButtonState();
     });
   }
 }
