@@ -40,7 +40,7 @@ class Todo {
         day: "numeric",
       })}`;
     }
-    //   TODO - impliment dates
+    //   TODO - implement dates
 
     this._generateCheckboxEl();
     this._setEventListeners();
