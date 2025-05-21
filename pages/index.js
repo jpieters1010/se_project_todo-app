@@ -28,8 +28,9 @@ const addTodoPopup = new PopupWithForm({
     const id = uuidv4();
     const values = { name, date, id };
 
-    const todoElement = generateTodo(values);
-    todosList.append(todoElement);
+    // const todoElement = generateTodo(values);
+    // todosList.append(todoElement);
+    renderTodo(values);
     todoCounter.updateTotal(true);
 
     addTodoPopup.close();
@@ -44,8 +45,10 @@ function handleCheck(completed) {
 }
 
 function handleDelete(completed) {
+  console.log("Delete completed state:", completed);
   todoCounter.updateTotal(false); // Decrease total count
   if (completed) {
+    console.log("Updating completed counter");
     todoCounter.updateCompleted(false); // Decrease completed count
   }
 }
@@ -56,11 +59,17 @@ const generateTodo = (data) => {
   return todoElement;
 };
 
+const renderTodo = (item) => {
+  const todo = generateTodo(item);
+  section.addItem(todo);
+};
+
 const section = new Section({
   items: initialTodos,
   renderer: (item) => {
-    const element = generateTodo(item);
-    section.addItem(element);
+    // const element = generateTodo(item);
+    // section.addItem(element);
+    renderTodo(item);
   },
   containerSelector: ".todos__list",
 });
